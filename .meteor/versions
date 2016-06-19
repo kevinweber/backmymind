@@ -17,6 +17,7 @@ callback-hook@1.0.4
 check@1.1.0
 coffeescript@1.0.11
 cosmos:browserify@0.5.1
+cunneen:sendgrid@0.9.0
 dandv:caret-position@2.1.1
 dburles:eslint@1.0.1
 ddp@1.2.2
@@ -87,8 +88,6 @@ skeleton:skeleton@2.0.4
 softwarerero:accounts-t9n@1.1.4
 spacebars@1.0.7
 spacebars-compiler@1.0.7
-splendido:accounts-emails-field@1.2.0
-splendido:accounts-meld@1.3.1
 srp@1.0.4
 standard-minifiers@1.0.2
 templating@1.1.5

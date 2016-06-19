@@ -1,3 +1,6 @@
+################ Project-specific secret files ################
+settings.json
+
 ################ Meteor ################
 .meteor/local
 packages/*

@@ -12,13 +12,28 @@ Meteor.startup(() => {
     throw new Meteor.Error(403, 'Username must have at least 3 characters');
   });
 
-  ////    Twitter login not working (unless we don't require email address for login) because the Twitter API is not providing an email address, see https://atmospherejs.com/splendido/accounts-meld
-  //    ServiceConfiguration.configurations.upsert({
-  //      service: "twitter"
-  //    }, {
-  //      $set: {
-  //        consumerKey: "rPIHoirPPpjoVuI45VaHsDFVS",
-  //        secret: "4FOJQjA4hZ8Z8bKduulHoW2LwiTmiB3TJM8wcyQz9I6wBuwEoS"
-  //      }
-  //    });
+  ServiceConfiguration.configurations.upsert({
+    service: "facebook"
+  }, {
+    $set: {
+      appId: Meteor.settings.private.facebook.appId,
+      secret: Meteor.settings.private.facebook.secret,
+      requestPermissions: ["user_friends"]
+    }
+  });
+
+  Meteor.startup(function () {
+    Meteor.Sendgrid.config({
+      username: Meteor.settings.private.sendgrid.username,
+      password: Meteor.settings.private.sendgrid.password
+    });
+  });
+
+  //  Meteor.Sendgrid.send({
+  //    to: 'whoItsTo@theDomain.com',
+  //    from: 'no-reply@where-ever.com',
+  //    subject: 'I really like sending emails with Sendgrid!',
+  //    text: 'Sendgrid is totally awesome for sending emails!'
+  //  });
+
 });

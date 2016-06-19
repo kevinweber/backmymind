@@ -21,6 +21,7 @@ audit-argument-checks
 skeleton:skeleton
 accounts-base
 accounts-password
+# accounts-facebook
 # accounts-twitter
 # https://github.com/meteor-useraccounts/core/blob/master/Guide.md
 useraccounts:unstyled
@@ -44,4 +45,4 @@ markdown
 simple:highlight.js
 less
 service-configuration
-splendido:accounts-meld
+cunneen:sendgrid
