@@ -2,14 +2,7 @@
   {{> header}}
   <div class="container" style="min-height: {{instance.minHeight.get}}">
     {{# if currentUser}}
-      <div class="row">
-        <div class="four columns">
-          {{> navigation}}
-        </div>
-        <div class="eight columns">
-          {{> Template.dynamic template=main}}
-        </div>
-      </div>
+      {{> Template.dynamic template=main}}
     {{else}}
       <div class="row">
         <div class="six columns offset-by-four">
