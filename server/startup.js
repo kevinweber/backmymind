@@ -12,15 +12,15 @@ Meteor.startup(() => {
     throw new Meteor.Error(403, 'Username must have at least 3 characters');
   });
 
-  ServiceConfiguration.configurations.upsert({
-    service: "facebook"
-  }, {
-    $set: {
-      appId: Meteor.settings.private.facebook.appId,
-      secret: Meteor.settings.private.facebook.secret,
-      requestPermissions: ["user_friends"]
-    }
-  });
+//  ServiceConfiguration.configurations.upsert({
+//    service: "facebook"
+//  }, {
+//    $set: {
+//      appId: Meteor.settings.private.facebook.appId,
+//      secret: Meteor.settings.private.facebook.secret,
+//      requestPermissions: ["user_friends"]
+//    }
+//  });
 
   Meteor.startup(function () {
     Meteor.Sendgrid.config({

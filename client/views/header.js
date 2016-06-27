@@ -24,3 +24,9 @@ Template.navigation.events({
     Meteor.navigation.close();
   }
 });
+
+Template.header.events({
+  'click a': function () {
+    Meteor.navigation.close();
+  }
+});
