@@ -3,12 +3,19 @@
     <div class="container">
       <ul>
         {{# if currentUser}}
-        <li class="{{activeIfRouteNameIs 'feed'}}">
-          <a href="{{pathFor 'feed'}}"><i class="fa fa-newspaper-o"></i> Feed</a>
+        <li class="{{activeIfRouteNameIs 'home'}}">
+          <a href="{{pathFor 'home'}}"><i class="fa fa-newspaper-o"></i> Home</a>
         </li>
-        <li class="{{activeIfRouteNameIs 'browseUsers'}}">
-          <a href="{{pathFor 'browseUsers'}}"><i class="fa fa-users"></i> Browse users</a>
+        <li class="{{activeIfRouteNameIs 'addRelation'}}">
+          <a href="{{pathFor 'addRelation'}}"><i class="fa fa-user-plus"></i> Add relation</a>
         </li>
+        <li class="{{activeIfRouteNameIs 'browseRelations'}}">
+          <a href="{{pathFor 'browseRelations'}}"><i class="fa fa-users"></i> Browse relations</a>
+        </li>
+        <li class="{{activeIfRouteNameIs 'browseFacebook'}}">
+          <a href="{{pathFor 'browseFacebook'}}"><i class="fa fa-facebook-square"></i> Browse Facebook friends</a>
+        </li>
+<!--
         <li class="{{activeIfRouteNameIs 'messages'}}">
           <a href="{{pathFor 'messages'}}"><i class="fa fa-envelope"></i> Messages {{getUnreadCount}}</a>
         </li>
@@ -21,6 +28,7 @@
         <li class="{{activeIfRouteNameIs 'follower'}}">
           <a href="{{pathFor 'follower'}}"><i class="fa fa-arrow-right"></i> <i class="fa fa-user"></i> Followers</a>
         </li>
+-->
         <li class="{{activeIfRouteNameIs 'updateProfile'}}">
           <a href="{{pathFor 'updateProfile'}}"><i class="fa fa-cogs"></i> Update profile</a>
         </li>

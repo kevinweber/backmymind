@@ -1,0 +1,10 @@
+{
+  "name": "backmymind",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "meteor --settings settings.json",
+    "staging": "modulus env set METEOR_SETTINGS \"$(cat settings-staging.json)\" -p 'App - Staging' && modulus deploy -f -p 'App - Staging'",
+    "production": "modulus env set METEOR_SETTINGS \"$(cat settings-production.json)\" -p 'App - Production' && modulus deploy -f -p 'App - Production'"
+  }
+}

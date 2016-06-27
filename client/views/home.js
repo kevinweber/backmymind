@@ -1,4 +1,4 @@
-Template.feed.onCreated(function() {
+Template.home.onCreated(function() {
   this.searchQuery = new ReactiveVar('');
   this.filter = new ReactiveVar('all');
   this.limit = new ReactiveVar(20);
@@ -11,14 +11,14 @@ Template.feed.onCreated(function() {
   });
 });
 
-Template.feed.onRendered(() => {
+Template.home.onRendered(() => {
   autosize($('[data-id=body]'));
 
   // Set submit button to disabled since text field is empty
   $('input[type=submit]').addClass('disabled');
 });
 
-Template.feed.helpers({
+Template.home.helpers({
   posts: () => {
     const instance = Template.instance();
     if (instance.searchQuery.get()) {
@@ -52,7 +52,7 @@ Template.feed.helpers({
   }
 });
 
-Template.feed.events({
+Template.home.events({
   'keyup [data-id=body]': (event, template) => {
     // If body section has text enable the submit button, else disable it
     if (template.find('[data-id=body]').value.toString().trim() !== '') {

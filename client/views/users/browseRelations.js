@@ -1,4 +1,4 @@
-Template.browseUsers.events({
+Template.browseRelations.events({
   'click [data-id=load-more]': (event, template) => {
     template.limit.set(template.limit.get() + 20);
   },
@@ -14,7 +14,7 @@ Template.browseUsers.events({
   }
 });
 
-Template.browseUsers.helpers({
+Template.browseRelations.helpers({
   users: () => {
     return Meteor.users.find({ _id: { $ne: Meteor.userId() } }, { sort: { createdAt: -1 } });
   },
@@ -24,7 +24,7 @@ Template.browseUsers.helpers({
   }
 });
 
-Template.browseUsers.onCreated(function() {
+Template.browseRelations.onCreated(function() {
   this.searchQuery = new ReactiveVar('');
   this.limit = new ReactiveVar(20);
   this.usersCount = new ReactiveVar(0);
