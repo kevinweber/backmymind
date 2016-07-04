@@ -15,6 +15,10 @@ Template.browseRelations.events({
 });
 
 Template.browseRelations.helpers({
+  relations: () => {
+    return Meteor.user() && Meteor.user().relations;
+  },
+
   users: () => {
     return Meteor.users.find({ _id: { $ne: Meteor.userId() } }, { sort: { createdAt: -1 } });
   },

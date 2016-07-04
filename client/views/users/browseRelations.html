@@ -8,6 +8,17 @@
   </div>
   <div class="row">
     <div class="twelve columns">
+      {{#each relations}}
+        <div class="small-profile">
+          <img class="avatar-image u-pull-left" src="{{this.avatar}}?s=20" alt="">
+          <a href="#" class="u-pull-left">First Last Name</a>
+          <div class="u-pull-right">
+            Other stuff
+          </div>
+          <div class="clear"></div>
+        </div>
+      {{/each}}
+
       {{#each users}}
         {{> smallProfile user=this}}
       {{/each}}
