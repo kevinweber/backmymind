@@ -4,7 +4,15 @@
       <form data-id="add-relation">
         <div class="row">
           <label for="email">Email*</label>
-          <input type="email" class="u-full-width" data-id="addEmail" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$" required>
+          <input type="email" class="u-full-width" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$" required data-id="addEmail">
+        </div>
+        <div class="row">
+          <label for="first-name">First Name</label>
+          <input id="first-name" class="u-full-width" type="text" data-id="addFirstName">
+        </div>
+        <div class="row">
+          <label for="last-name">Last Name</label>
+          <input id="last-name" class="u-full-width" type="text" data-id="addLastName">
         </div>
 
         <div class="row">

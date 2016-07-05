@@ -20,7 +20,10 @@
       {{/each}}
 
       {{#unless relations.length}}
-        <div class="alert info">There are no matching relations to display</div>
+        <div class="alert info">
+          <p>There are no matching relations to display.</p>
+          <p><a href="{{pathFor 'addRelation'}}"><i class="fa fa-user-plus"></i> Add a new one.</a></p>
+        </div>
       {{/unless}}
     </div>
   </div>
