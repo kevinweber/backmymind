@@ -64,8 +64,10 @@ Template.addRelation.helpers({
 
 Template.addRelation.events({
   'keyup [data-id=addEmail]': (event, template) => {
+    var $form = $('[data-id=add-relation]');
+
     // If addEmail section has text enable the submit button, else disable it
-    if (template.find('[data-id=addEmail]').value.toString().trim() !== '') {
+    if ($form.first()[0].checkValidity()) {
       $('input[type=submit]').removeClass('disabled');
     } else {
       $('input[type=submit]').addClass('disabled');
@@ -73,8 +75,12 @@ Template.addRelation.events({
 
     // When shift and enter are pressed, submit form
     if (event.shiftKey && event.keyCode === 13) {
-      $('[data-id=add-relation]').submit();
+      $form.submit();
     }
+  },
+
+  'change input, paste input': (event, template) => {
+    $(event.target).addClass('populated');
   },
 
   'submit [data-id=add-relation]': (event, template) => {

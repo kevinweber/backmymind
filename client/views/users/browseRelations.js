@@ -45,6 +45,8 @@ Template.browseRelations.helpers({
     const instance = Template.instance();
     let filter = instance.searchQuery.get();
 
+    check(filter, String);
+    
     // If filter is given...
     if (filter) {
       let relations = Meteor.users.findOne({

@@ -4,7 +4,7 @@ Meteor.publish(null, function() {
   }
 });
 
-Meteor.publish('user.relations', function(query, limit) {
+Meteor.publish('user.relations', function() {
   return Meteor.users.find({ _id: this.userId }, { fields: { relations: 1 } });
 });
 
