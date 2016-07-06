@@ -6,7 +6,8 @@ function isValidRelation(object, filter) {
 
   for (let i = 0, l = filterableFields.length; i < l; i += 1) {
     let field = object[filterableFields[i]];
-    if (field && field.indexOf(filter) !== -1) {
+    // We're using "toLowerCase()" to filter case-insensitive
+    if (field && field.toLowerCase().indexOf(filter.toLowerCase()) !== -1) {
       return true;
     }
   }
