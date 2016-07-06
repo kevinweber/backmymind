@@ -16,6 +16,14 @@ function setEmailValidationMessage(element) {
   }
 }
 
+function submitForm() {
+  var $form = $('[data-id=add-relation]');
+
+  // Simulate click to trigger HTML5 form validation
+  $form.find('input[type=submit]').click();
+  $form.submit();
+}
+
 Template.addRelation.onCreated(function () {
   this.searchQuery = new ReactiveVar('');
   this.filter = new ReactiveVar('all');
@@ -32,6 +40,8 @@ Template.addRelation.onCreated(function () {
 Template.addRelation.onRendered(() => {
   var $form = $('[data-id=add-relation]');
   $form.find('input').not('[type=submit]').first().focus();
+  
+  autosize($('textarea'));
 
   // Set submit button to disabled since text field is empty
   $form.find('input[type=submit]').addClass('disabled');
@@ -92,14 +102,46 @@ Template.addRelation.events({
         $('input[type=submit]').addClass('disabled');
       }
     });
-
-    //    // When shift and enter are pressed, submit form
-    //    if (event.shiftKey && event.keyCode === 13) {
-    //      $form.submit();
-    //    }
   },
 
-  'change input, paste input': (event, template) => {
+  'keydown input': (event, template) => {
+    var $form = $('[data-id=add-relation]'),
+      $inputs,
+      currentIndex;
+    
+    if (!event.shiftKey && event.keyCode === 13) {
+      event.preventDefault();
+      
+      $inputs = $form.find('input, textarea').not('[disabled], .disabled');
+      currentIndex = $inputs.index(event.target);
+
+      if (currentIndex + 1 === $inputs.length || $inputs.get(currentIndex + 1).type === 'submit') {
+        submitForm();
+      } else {
+        $inputs.get(currentIndex + 1).focus();
+      }
+    }
+  },
+
+  'keydown input, keydown textarea': (event, template) => {
+    var $form = $('[data-id=add-relation]');
+    
+    // When shift and enter are pressed, submit form
+    if (event.shiftKey && event.keyCode === 13) {
+      event.preventDefault();
+      
+      submitForm();
+    }
+  },
+
+  'click input[type=submit]': (event, template) => {
+    var $form = $('[data-id=add-relation]');
+
+    $form.find('input').addClass('validate');
+    //    setEmailValidationMessage(element);
+  },
+
+  'change input, paste input, blur input': (event, template) => {
     var element = event.target;
 
     $(element).addClass('populated');
@@ -120,6 +162,7 @@ Template.addRelation.events({
       user.email = template.find('[data-id=addEmail]').value.toString();
       user.firstName = template.find('[data-id=addFirstName]').value.toString();
       user.lastName = template.find('[data-id=addLastName]').value.toString();
+      user.notes = template.find('[data-id=addNotes]').value.toString();
       user.avatar = getGravatar(user.email);
 
       Meteor.call('users.addRelation', user, (error, result) => {
@@ -128,11 +171,13 @@ Template.addRelation.events({
         } else {
           Bert.alert('Relation successfully added', 'success', 'growl-top-right');
 
+          // Reset form
           var $form = $('[data-id=add-relation]');
-          $form.find('input[type=text], input[type=email]').val('');
           $form.find('input[type=submit]').addClass('disabled');
+          $form.find('.validate').removeClass('validate');
           $form.find('.populated').removeClass('populated');
-          $form.find('input').not('[type=submit]').first().focus();
+          $form.find('textarea').val('');
+          $form.find('input').not('[type=submit]').val('').first().focus();
         }
       });
     }

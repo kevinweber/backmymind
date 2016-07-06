@@ -72,3 +72,8 @@ Template.browseRelations.onCreated(function () {
   
   Meteor.subscribe('user.relations');
 });
+
+Template.browseRelations.onRendered(function () {
+  var $form = $('[data-id=search-users-form]');
+  $form.find('input').not('[type=submit]').first().focus();
+});

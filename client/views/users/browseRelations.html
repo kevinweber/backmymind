@@ -2,7 +2,7 @@
   <div class="row">
     <div class="twelve columns">
       <form data-id="search-users-form">
-        <input type="text" class="u-full-width" placeholder="Find relations..." data-id="search-query">
+        <input type="text" class="u-full-width" placeholder="Search Relations" data-id="search-query">
       </form>
     </div>
   </div>
@@ -21,7 +21,7 @@
 
       {{#unless relations.length}}
         <div class="alert info">
-          <p>There are no matching relations to display.</p>
+          <p>No matching relations found.</p>
           <p><a href="{{pathFor 'addRelation'}}"><i class="fa fa-user-plus"></i> Add a new one.</a></p>
         </div>
       {{/unless}}
