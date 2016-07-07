@@ -19,9 +19,8 @@ function setEmailValidationMessage(element) {
 function submitForm() {
   var $form = $('[data-id=add-relation]');
 
-  // Simulate click to trigger HTML5 form validation
+  // Simulate click to trigger HTML5 form validation, and submit if form is valid
   $form.find('input[type=submit]').click();
-  $form.submit();
 }
 
 Template.addRelation.onCreated(function () {
