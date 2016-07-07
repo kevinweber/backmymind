@@ -15,6 +15,11 @@
           <input id="last-name" class="u-full-width" type="text" data-id="addLastName">
         </div>
         <div class="row">
+          <label for="last-meeting">When did you meet/chat lastly?</label>
+          <input id="last-meeting" class="u-full-width datepicker" type="text" placeholder="Pick date…" data-value="{{date.today}}" readonly="" aria-haspopup="true" aria-expanded="false" aria-readonly="false" data-id="addLastMeeting">
+          <p><i>Hint: If you can't remember  your last chat (or you're lazy), just leave our suggested default: today. We'll ask you to update this later.</i></p>
+        </div>
+        <div class="row">
           <label for="notes">Private Notes</label>
           <textarea id="notes" class="u-full-width" data-id="addNotes"></textarea>
         </div>

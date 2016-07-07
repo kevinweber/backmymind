@@ -42,12 +42,25 @@ Template.addRelation.onRendered(() => {
   $form.find('input').not('[type=submit]').first().focus();
   
   autosize($('textarea'));
+  
+  // Documentation: http://amsul.ca/pickadate.js/date/
+  $('.datepicker').pickadate({
+    formatSubmit: 'yyyy/mm/dd',
+    hiddenName: true,
+    min: new Date(1900,0,1),
+    max: moment()
+  });
 
   // Set submit button to disabled since text field is empty
   $form.find('input[type=submit]').addClass('disabled');
 });
 
 Template.addRelation.helpers({
+  date: () => {
+    this.today = moment();
+    return this;
+  },
+
   posts: () => {
     const instance = Template.instance();
     if (instance.searchQuery.get()) {
