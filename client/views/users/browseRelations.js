@@ -41,16 +41,57 @@ Template.browseRelations.events({
   }, 300)
 });
 
+function Relation(props) {
+  this.props = props;
+}
+
+var RelationHelper = {
+  props: null,
+  linkName: null,
+  setLinkName: function () {
+    var props = this.props,
+      linkName;
+    
+    if (props.firstName && props.lastName) {
+      linkName = props.firstName + ' ' + props.lastName;
+    } else if ((props.firstName && !props.lastName) || (!props.firstName && props.lastName)) {
+      linkName = props.firstName || props.lastName;
+    } else {
+      linkName = props.email;
+    }
+      
+    this.linkName = linkName;
+  },
+  init: function (props) {
+    this.props = props;
+
+    this.setLinkName();
+  }
+}
+
+function addRelationHelpers(relations) {
+  for (let i = 0, l = relations.length; i < l; i += 1) {
+    if (typeof relations[i].helper !== 'RelationHelper') {
+      relations[i].helper = Object.create(RelationHelper);
+    }
+    
+    relations[i].helper.init(relations[i]);
+  }
+
+  return relations;
+}
+
 Template.browseRelations.helpers({
   relations: () => {
     const instance = Template.instance();
-    let filter = instance.searchQuery.get();
+    let filter = instance.searchQuery.get(),
+      relations;
 
     check(filter, String);
     
     // If filter is given...
     if (filter) {
-      let relations = Meteor.users.findOne({
+      relations = Meteor.users.findOne({
         _id: Meteor.userId()
       }, {
         fields: {
@@ -59,12 +100,16 @@ Template.browseRelations.helpers({
       }).relations;
 
       relations = filterRelations(relations, filter);
-
-      return relations;
+    } else {
+      // Default: Display all relations
+      relations = Meteor.user() && Meteor.user().relations;
     }
 
-    // Default: Display all relations
-    return Meteor.user() && Meteor.user().relations;
+    if (typeof relations !== 'undefined') {
+      relations = addRelationHelpers(relations);
+    }
+    
+    return relations;
   }
 });
 

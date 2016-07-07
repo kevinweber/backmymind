@@ -63,6 +63,7 @@ Meteor.methods({
       email: ValidEmail,
       firstName: String,
       lastName: String,
+      lastMeeting: Date,
       notes: String,
       avatar: String
     });

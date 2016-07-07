@@ -47,8 +47,7 @@ Template.addRelation.onRendered(() => {
   var $datepicker = $form.find('.datepicker');
   
   $datepicker.pickadate({
-    formatSubmit: 'yyyy/mm/dd',
-    hiddenName: true,
+    formatSubmit: 'yyyy-mm-dd',
     min: new Date(1900,0,1),
     max: moment()
   });
@@ -180,6 +179,7 @@ Template.addRelation.events({
       user.email = template.find('[data-id=addEmail]').value.toString();
       user.firstName = template.find('[data-id=addFirstName]').value.toString();
       user.lastName = template.find('[data-id=addLastName]').value.toString();
+      user.lastMeeting = new Date($(template.find('.datepicker ~ input[name=_submit]')).val());
       user.notes = template.find('[data-id=addNotes]').value.toString();
       user.avatar = getGravatar(user.email);
 
