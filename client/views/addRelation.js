@@ -37,18 +37,24 @@ Template.addRelation.onCreated(function () {
 });
 
 Template.addRelation.onRendered(() => {
-  var $form = $('[data-id=add-relation]');
-  $form.find('input').not('[type=submit]').first().focus();
+  var $form = $('[data-id=add-relation]'),
+    $datepicker;
   
+  $form.find('input').not('[type=submit]').first().focus();
   autosize($('textarea'));
   
   // Documentation: http://amsul.ca/pickadate.js/date/
-  $('.datepicker').pickadate({
+  var $datepicker = $form.find('.datepicker');
+  
+  $datepicker.pickadate({
     formatSubmit: 'yyyy/mm/dd',
     hiddenName: true,
     min: new Date(1900,0,1),
     max: moment()
   });
+  
+  // Store default value so we can reset to it when form is reset
+  $datepicker.attr('data-default-date', $datepicker.val());
 
   // Set submit button to disabled since text field is empty
   $form.find('input[type=submit]').addClass('disabled');
@@ -184,12 +190,17 @@ Template.addRelation.events({
           Bert.alert('Relation successfully added', 'success', 'growl-top-right');
 
           // Reset form
-          var $form = $('[data-id=add-relation]');
+          var $form = $('[data-id=add-relation]'),
+            $input = $form.find('input').not('[type=submit]'),
+            $datepicker = $form.find('.datepicker');
+          
           $form.find('input[type=submit]').addClass('disabled');
           $form.find('.validate').removeClass('validate');
           $form.find('.populated').removeClass('populated');
           $form.find('textarea').val('');
-          $form.find('input').not('[type=submit]').val('').first().focus();
+          $input.val('');
+          $datepicker.val($datepicker.attr('data-default-date'));
+          $input.first().focus();
         }
       });
     }
