@@ -47,6 +47,7 @@ Template.addRelation.onRendered(() => {
   var $datepicker = $form.find('.datepicker');
   
   $datepicker.pickadate({
+    // Note: The datepicker's value for the data-value attribute must match this format, otherwise it will always fall back to today's date
     formatSubmit: 'yyyy-mm-dd',
     min: new Date(1900,0,1),
     max: moment()
@@ -61,7 +62,8 @@ Template.addRelation.onRendered(() => {
 
 Template.addRelation.helpers({
   date: () => {
-    this.today = moment();
+    this.yesterday = moment().subtract(1, 'day').format("YYYY-MM-DD");
+    this.today = moment().format("YYYY-MM-DD");
     return this;
   },
 
