@@ -182,6 +182,10 @@ Template.addRelation.events({
       user.firstName = template.find('[data-id=addFirstName]').value.toString();
       user.lastName = template.find('[data-id=addLastName]').value.toString();
       user.lastMeeting = new Date($(template.find('.datepicker ~ input[name=_submit]')).val());
+      user.primaryPhone = template.find('[data-id=addPhonePrimary]').value.toString();
+      user.secondaryPhone = template.find('[data-id=addPhoneSecondary]').value.toString();
+      user.facebook = template.find('[data-id=addFacebook]').value.toString();
+      user.linkedin = template.find('[data-id=addLinkedin]').value.toString();
       user.notes = template.find('[data-id=addNotes]').value.toString();
       user.avatar = getGravatar(user.email);
 

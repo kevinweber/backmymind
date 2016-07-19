@@ -11,6 +11,35 @@ ValidEmail = Match.Where(function (x) {
 
 ValidEmail.regex = /^[A-Z0-9._%+\-]+@[A-Z0-9\.\-]+\.[A-Z]{2,}$/i;
 
+/*
+ * Phone validation
+   Use like this:
+   
+   check(tel, ValidPhone);
+ */
+ValidPhone = Match.Where(function (x) {
+  check(x, String);
+  return x.length === 0 || (x.length <= 254 && ValidPhone.regex.test(x));
+});
+
+ValidPhone.regex = /^\s*(?:\+?(\d{1,3}))?[\-. (]*(\d{3})[\-. )]*(\d{3})[\-. ]*(\d{4})(?: *x(\d+))?\s*$/i;
+
+/*
+ * Url validation
+   Use like this:
+   
+   check(url, ValidUrl);
+ */
+ValidUrl = Match.Where(function (x) {
+  check(x, String);
+  return x.length === 0 || (x.length <= 254 && ValidUrl.regex.test(x));
+});
+
+ValidUrl.regex = /^(https?:\/\/)?([\da-z\.\-]+)\.([a-z\.]{2,6})([\/\w \.\-]*)*\/?$/i;
+
+
+
+
 
 /*
  * Loop through an array and return a values of a certain property in an array.
@@ -64,6 +93,10 @@ Meteor.methods({
       firstName: String,
       lastName: String,
       lastMeeting: Date,
+      primaryPhone: ValidPhone,
+      secondaryPhone: ValidPhone,
+      facebook: ValidUrl,
+      linkedin: ValidUrl,
       notes: String,
       avatar: String
     });
