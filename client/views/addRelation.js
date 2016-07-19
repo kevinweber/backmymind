@@ -13,18 +13,18 @@ function submitForm() {
   $form.find('input[type=submit]').click();
 }
 
-Template.addRelation.onCreated(function () {
-  this.searchQuery = new ReactiveVar('');
-  this.filter = new ReactiveVar('all');
-  this.limit = new ReactiveVar(20);
-  this.postsCount = new ReactiveVar(0);
-
-  this.autorun(() => {
-    this.subscribe('posts.all', this.searchQuery.get(), this.filter.get(), this.limit.get());
-    this.subscribe('users.all', this.searchQuery.get(), this.limit.get());
-    this.postsCount.set(Counts.get('posts.all'));
-  });
-});
+//Template.addRelation.onCreated(function () {
+//  this.searchQuery = new ReactiveVar('');
+//  this.filter = new ReactiveVar('all');
+//  this.limit = new ReactiveVar(20);
+//  this.postsCount = new ReactiveVar(0);
+//
+//  this.autorun(() => {
+////    this.subscribe('posts.all', this.searchQuery.get(), this.filter.get(), this.limit.get());
+////    this.subscribe('users.all', this.searchQuery.get(), this.limit.get());
+////    this.postsCount.set(Counts.get('posts.all'));
+//  });
+//});
 
 Template.addRelation.onRendered(() => {
   var $form = $('[data-id=add-relation]'),

@@ -1,12 +1,12 @@
 <template name="home">
-  <div class="row">
+<!--  <div class="row">
     <div class="twelve columns">
       <form class="search-posts-form" data-id="search-posts-form">
         <input type="text" class="u-full-width" placeholder="Search posts..." data-id="search-query">
       </form>
     </div>
   </div>
-  <hr>
+  <hr>-->
 <!-- REINSERT TO FILTER POSTS
   <div class="row">
     <div class="twelve columns">
@@ -30,7 +30,29 @@
     </div>
   </div>
 -->
-  <div class="row">
+<div class="row">
+    <div class="twelve columns">
+      {{#each all}}
+        <div class="small-profile">
+          <img class="avatar-image u-pull-left" src="{{this.avatar}}?s=20" alt="">
+          <a href="#" class="u-pull-left">{{this.helper.linkName}}</a>
+          <p>Last meeting: {{date this.lastMeeting "short"}}</p>
+          <div class="u-pull-right">
+            Other stuff
+          </div>
+          <div class="clear"></div>
+        </div>
+      {{/each}}
+
+      {{#unless all.length}}
+        <div class="alert info">
+          <p>No matching relations found.</p>
+          <p><a href="{{pathFor 'addRelation'}}"><i class="fa fa-user-plus"></i> Add a new one.</a></p>
+        </div>
+      {{/unless}}
+    </div>
+  </div>
+<!--  <div class="row">
     <div class="twelve columns">
       {{#each posts}}
         {{> post post=this}}
@@ -46,5 +68,5 @@
         <div class="text-center">Loading posts...</div>
       {{/if}}
     </div>
-  </div>
+  </div>-->
 </template>

@@ -107,8 +107,8 @@ Meteor.methods({
     }
 
     // Allow every email address only once
-    if (typeof currentUser.relations !== 'undefined' && collectValues(currentUser.relations, "email").indexOf(user.email) !== -1) {
-      throw new Meteor.Error(422, 'You added that relation already');
+    if (user.email.length !== 0 && typeof currentUser.relations !== 'undefined' && collectValues(currentUser.relations, "email").indexOf(user.email) !== -1) {
+      throw new Meteor.Error(422, 'You added a relation with that email address already');
     }
 
     Meteor.users.update({

@@ -43,3 +43,24 @@ addRelationHelpers = function (relations) {
 
   return relations;
 }
+
+var DateFormats = {
+  short: "DD MMM YYYY",
+  short_current: "DD MMM",
+  long: "dddd, MMMM Do YYYY, h:mm:ss a"
+};
+
+UI.registerHelper("date", function (datetime, format) {
+  if (moment) {
+    var formatting = DateFormats[format] || format;
+    
+    // Special case: Don't show year for dates in current year
+    if (moment(datetime).year() === moment().year()) {
+      formatting = DateFormats[format + '_current'];
+    }
+    
+    return moment(datetime).format(formatting);
+  } else {
+    return datetime;
+  }
+});
