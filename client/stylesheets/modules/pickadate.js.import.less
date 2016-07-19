@@ -1,0 +1,60 @@
+.picker__nav--disabled {
+  opacity: 0.2;
+  &:hover,
+  &:focus {
+    background: transparent;
+    cursor: auto;
+  }
+}
+
+.picker__button--clear,
+.picker__button--close,
+.picker__button--today {
+  padding: 0;
+  width: 30%;
+  box-sizing: content-box;
+}
+
+.picker--focused .picker__day--selected,
+.picker__day--selected,
+.picker__day--selected:hover {
+  background: @primary;
+}
+
+.picker__day--highlighted:hover,
+.picker__day--infocus:hover,
+.picker__day--outfocus:hover {
+  &:not(.picker__day--disabled) {
+    background: @primaryLight;
+    color: @black;
+  }
+}
+
+.picker__day--today:before,
+.picker__button--today:before {
+  border-top-color: @primary;
+}
+
+.picker__button--clear:hover,
+.picker__button--close:hover,
+.picker__button--today:hover {
+  background: @primaryLight;
+  border-color: @primary;
+}
+
+.picker__button--clear:before {
+  border-top-color: @red;
+}
+
+.picker__day,
+.picker__weekday {
+  text-align: center;
+}
+
+th:first-child,
+td:first-child,
+th:last-child,
+td:last-child {
+  padding-right: 0;
+  padding-left: 0;
+}
