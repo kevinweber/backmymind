@@ -3,12 +3,8 @@
     <div class="twelve columns">
       <form data-id="add-relation">
         <div class="row">
-          <label for="email">Email*</label>
-          <input type="email" class="u-full-width" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$" required data-id="addEmail">
-        </div>
-        <div class="row">
-          <label for="first-name">First Name</label>
-          <input id="first-name" class="u-full-width" type="text" data-id="addFirstName">
+          <label for="first-name">First Name*</label>
+          <input id="first-name" class="u-full-width" type="text" required data-id="addFirstName">
         </div>
         <div class="row">
           <label for="last-name">Last Name</label>
@@ -18,6 +14,10 @@
           <label for="last-meeting">When did you meet/chat lastly?</label>
           <input id="last-meeting" class="u-full-width datepicker" type="text" placeholder="Pick date…" data-value="{{date.yesterday}}" readonly="" aria-haspopup="true" aria-expanded="false" aria-readonly="false" data-id="addLastMeeting">
           <p><i>Hint: If you can't remember  your last chat (or you're lazy), just leave our suggested default: yesterday. We'll ask you to update this later.</i></p>
+        </div>
+        <div class="row">
+          <label for="email">Email</label>
+          <input type="email" class="u-full-width" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$" data-id="addEmail">
         </div>
         <div class="row">
           <label for="primary-phone"><i class="fa fa-mobile" aria-hidden="true"></i> Primary Phone </label>
