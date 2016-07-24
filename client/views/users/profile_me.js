@@ -21,6 +21,10 @@ Template.profileMe.events({
 
       updatedValues[$that.attr('data-id')] = $that.val();
     });
+    
+    if ($.isEmptyObject(updatedValues)) {
+      return; // Nothing has changed
+    }
 
     Meteor.call('users.updateProfile', updatedValues, (error, result) => {
       if (error) {
