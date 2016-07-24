@@ -58,6 +58,17 @@ Template.addRelation.helpers({
   }
 });
 
+function selectedDate(template) {
+  var value = $(template.find('.datepicker ~ input[name=_submit]')).val();
+
+  if (!value) {
+    // Fallback to initial value
+    value = $(template.find('.datepicker')).data('value');
+  }
+
+  return new Date(value);
+}
+
 Template.addRelation.events({
   'keyup input[required]': (event, template) => {
     var $form = $('[data-id=add-relation]');
@@ -129,7 +140,7 @@ Template.addRelation.events({
       user.email = template.find('[data-id=addEmail]').value.toString();
       user.firstName = template.find('[data-id=addFirstName]').value.toString();
       user.lastName = template.find('[data-id=addLastName]').value.toString();
-      user.lastMeeting = new Date($(template.find('.datepicker ~ input[name=_submit]')).val());
+      user.lastMeeting = selectedDate(template);
       user.primaryPhone = template.find('[data-id=addPhonePrimary]').value.toString();
       user.secondaryPhone = template.find('[data-id=addPhoneSecondary]').value.toString();
       user.facebook = template.find('[data-id=addFacebook]').value.toString();
