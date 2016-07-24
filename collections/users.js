@@ -110,6 +110,9 @@ Meteor.methods({
     if (user.email.length !== 0 && typeof currentUser.relations !== 'undefined' && collectValues(currentUser.relations, "email").indexOf(user.email) !== -1) {
       throw new Meteor.Error(422, 'You added a relation with that email address already');
     }
+    
+    // Add unique ID to each relation
+    user._id = new Meteor.Collection.ObjectID().valueOf();
 
     Meteor.users.update({
       _id: Meteor.userId()

@@ -4,30 +4,39 @@ Template.profile.events({
   }
 });
 
+
+
+
 Template.profile.helpers({
   user: () => {
-    return Meteor.users.findOne({ _id: FlowRouter.getParam('_id') });
-  },
+    var currentId = FlowRouter.getParam('_id'),
+      user = Meteor.users.findOne({
+        _id: currentId
+      }) || {};
 
-  posts: function() {
-    return Posts.find({}, { sort: { createdAt: -1 } });
-  },
+    if (currentId === Meteor.userId()) {
+      user.self = true;
+    } else {
+      user.relation = Relations.findOne(currentId);
+    }
 
-  hasMorePosts: () => {
-    return Template.instance().limit.get() <= Template.instance().userPostsCount.get();
+    return user;
   }
 });
 
 Template.profile.onCreated(function () {
   this.limit = new ReactiveVar(20);
-  this.userPostsCount = new ReactiveVar(0);
+  //  this.userPostsCount = new ReactiveVar(0);
 
   this.autorun(() => {
+    Meteor.subscribe('user.relations');
     this.subscribe('users.profile', FlowRouter.getParam('_id'), this.limit.get());
-    this.userPostsCount.set(Counts.get('users.profile'));
+    //    this.userPostsCount.set(Counts.get('users.profile'));
 
     // Get current user's social media accounts
-    let profileUser = Meteor.users.findOne({_id: FlowRouter.getParam('_id')});
+    let profileUser = Meteor.users.findOne({
+      _id: FlowRouter.getParam('_id')
+    });
 
     // Display social media links
     if (profileUser && profileUser.socialMedia) {
