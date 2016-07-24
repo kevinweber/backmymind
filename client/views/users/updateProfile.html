@@ -2,7 +2,7 @@
   <div class="row">
     <div class="twelve columns">
       <div class="profile">
-        <p class="text-center"><img class="avatar-image" src="{{avatar currentUser._id size=100}}" alt=""></p>
+        <p class="text-center">{{> avatar data=this size=100}}</p>
         <h1 class="text-center username">@{{currentUser.username}}</h1>
         <div id="socialMediaAccounts">
         </div>

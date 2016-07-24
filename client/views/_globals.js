@@ -85,33 +85,6 @@ var DateFormats = {
   long: "dddd, MMMM Do YYYY, h:mm:ss a"
 };
 
-/*
- * Deal with avatars.
- * Default images are generated using https://robohash.org/
- */
-Avatars = {
-  href: function (data) {
-    var hash = data.id,
-      size = data.size + "x" + data.size;
-
-    if (data.email) {
-      hash = encode(data.email);
-    } else if (hash === Meteor.userId()) {
-      hash = encode(Meteor.user().emails[0].address);
-    }
-
-    return "//robohash.org/" + hash + "?gravatar=hashed&size=" + size; // ?gravatar=yes&
-  }
-}
-
-UI.registerHelper("avatar", function (id, options) {
-  return Avatars.href({
-    id: id,
-    size: options.hash.size || 30,
-    email: options.hash.email
-  });
-});
-
 UI.registerHelper("date", function (datetime, format) {
   if (moment) {
     var formatting = DateFormats[format] || format;
