@@ -9,7 +9,7 @@ resetForm = ($form) => {
   $form.find('input[type=submit]').addClass('disabled');
 }
 
-Template.self.events({
+Template.profileMe.events({
   'submit [data-id=update-profile-form]': (event, template) => {
     event.preventDefault();
 

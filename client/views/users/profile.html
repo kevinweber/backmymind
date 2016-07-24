@@ -1,11 +1,11 @@
 <template name="profile">
   <div class="row">
     <div class="twelve columns">
-      <div class="profile" data-account="{{user.account}}" data-self="{{user.self}}">
+      <div class="profile" data-account="{{user.account}}" data-me="{{user.me}}">
         {{#with user}}
           {{#if user.account}}
-            {{#if user.self}}
-              {{> self user}}
+            {{#if user.me}}
+              {{> profileMe user}}
             {{else}}
               {{> profileUser user}}
             {{/if}}

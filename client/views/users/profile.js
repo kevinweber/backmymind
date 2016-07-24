@@ -52,7 +52,7 @@ getUser = () => {
     user.account = true;
 
     if (currentId === Meteor.userId()) {
-      user.self = true;
+      user.me = true;
       return user;
     }
   } else {
