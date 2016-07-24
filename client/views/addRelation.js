@@ -29,20 +29,20 @@ function submitForm() {
 Template.addRelation.onRendered(() => {
   var $form = $('[data-id=add-relation]'),
     $datepicker;
-  
+
   $form.find('input').not('[type=submit]').first().focus();
   autosize($('textarea'));
-  
+
   // Documentation: http://amsul.ca/pickadate.js/date/
-  var $datepicker = $form.find('.datepicker');
-  
+  $datepicker = $form.find('.datepicker');
+
   $datepicker.pickadate({
     // Note: The datepicker's value for the data-value attribute must match this format, otherwise it will always fall back to today's date
     formatSubmit: 'yyyy-mm-dd',
-    min: new Date(1900,0,1),
+    min: new Date(1900, 0, 1),
     max: moment()
   });
-  
+
   // Store default value so we can reset to it when form is reset
   $datepicker.attr('data-default-date', $datepicker.val());
 
@@ -55,48 +55,6 @@ Template.addRelation.helpers({
     this.yesterday = moment().subtract(1, 'day').format("YYYY-MM-DD");
     this.today = moment().format("YYYY-MM-DD");
     return this;
-  },
-
-  posts: () => {
-    const instance = Template.instance();
-    if (instance.searchQuery.get()) {
-      return Posts.find({}, {
-        sort: [['score', 'desc']]
-      });
-    }
-    return Posts.find({}, {
-      sort: {
-        createdAt: -1
-      }
-    });
-  },
-
-  activeIfFilterIs: (filter) => {
-    if (filter === Template.instance().filter.get()) {
-      return 'active';
-    }
-  },
-
-  hasMorePosts: () => {
-    return Template.instance().limit.get() <= Template.instance().postsCount.get();
-  },
-  // Settings for autocomplete in post field
-  settings: () => {
-    return {
-      position: 'bottom',
-      limit: 5,
-      rules: [{
-        token: '@',
-        collection: Meteor.users,
-        field: 'username',
-        template: Template.userList,
-        filter: {
-          _id: {
-            $ne: Meteor.userId()
-          }
-        }
-      }]
-    };
   }
 });
 
@@ -104,7 +62,7 @@ Template.addRelation.events({
   'keyup input[required]': (event, template) => {
     var $form = $('[data-id=add-relation]');
 
-    window.requestAnimationFrame(function(){
+    window.requestAnimationFrame(function () {
       if ($form.first()[0].checkValidity()) {
         $('input[type=submit]').removeClass('disabled');
       } else {
@@ -117,10 +75,10 @@ Template.addRelation.events({
     var $form = $('[data-id=add-relation]'),
       $inputs,
       currentIndex;
-    
+
     if (!event.shiftKey && event.keyCode === 13) {
       event.preventDefault();
-      
+
       $inputs = $form.find('input, textarea').not('[disabled], .disabled');
       currentIndex = $inputs.index(event.target);
 
@@ -134,11 +92,11 @@ Template.addRelation.events({
 
   'keydown input, keydown textarea': (event, template) => {
     var $form = $('[data-id=add-relation]');
-    
+
     // When shift and enter are pressed, submit form
     if (event.shiftKey && event.keyCode === 13) {
       event.preventDefault();
-      
+
       submitForm();
     }
   },
@@ -189,7 +147,7 @@ Template.addRelation.events({
           var $form = $('[data-id=add-relation]'),
             $input = $form.find('input').not('[type=submit]'),
             $datepicker = $form.find('.datepicker');
-          
+
           $form.find('input[type=submit]').addClass('disabled');
           $form.find('.validate').removeClass('validate');
           $form.find('.populated').removeClass('populated');
