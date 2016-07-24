@@ -1,7 +1,7 @@
 <template name="profileMe">
   <form data-id="update-profile-form">
     <p class="text-center">{{> avatar data=this size=100}}</p>
-    <h1 class="text-center username">@{{this.username}}</h1>
+    <h1 class="text-center username">{{currentUser.firstName}} {{currentUser.lastName}}</h1>
     <div id="socialMediaAccounts">
     </div>
     
