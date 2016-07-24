@@ -41,6 +41,10 @@
       user-select: none;
     }
     &.editable {
+      label {
+        padding-left: 10px;
+        padding-right: 10px;
+      }
       &:hover {
         background-color: @primaryVeryLight;
         color: @primary;
@@ -70,10 +74,6 @@
       label:hover {
         cursor: auto;
       }
-    }
-    label {
-      padding-left: 10px;
-      padding-right: 10px;
     }
   }
   input[type="submit"] {

@@ -1,0 +1,29 @@
+<template name="profileUser">
+  <form data-id="update-profile-form">
+    <p class="text-center">{{> avatar data=this size=100}}</p>
+    <h1 class="text-center username">@{{this.username}}</h1>
+    <div id="socialMediaAccounts">
+    </div>
+    
+    {{#if this.firstName}}
+    <div class="row form-section">
+      <label for="first-name">First Name</label>
+      <p id="first-name" class="u-full-width" data-element-type="input">{{this.firstName}}</p>
+    </div>
+    {{/if}}
+    
+    {{#if this.lastName}}
+    <div class="row form-section">
+      <label for="last-name">Last Name</label>
+      <p id="last-name" class="u-full-width" data-element-type="input">{{this.lastName}}</p>
+    </div>
+    {{/if}}
+
+    {{#if this.biography}}
+    <div class="row form-section">
+      <label for="biography">Biography</label>
+      <p id="biography" class="u-full-width" data-element-type="textarea">{{this.biography}}</p>
+    </div>
+    {{/if}}
+  </form>
+</template>

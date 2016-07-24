@@ -4,7 +4,11 @@
       <div class="profile" data-account="{{user.account}}" data-self="{{user.self}}">
         {{#with user}}
           {{#if user.account}}
-            {{> self user}}
+            {{#if user.self}}
+              {{> self user}}
+            {{else}}
+              {{> profileUser user}}
+            {{/if}}
           {{/if}}
 
           {{#if user.relation}} 
