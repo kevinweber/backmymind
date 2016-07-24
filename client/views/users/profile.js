@@ -1,7 +1,42 @@
-Template.profile.events({
-  'click [data-id=load-more]': (event, template) => {
-    template.limit.set(template.limit.get() + 20);
+enableFormSection = ($section) => {
+  var $inputs = $section.find('[readonly]');
+
+  if (!$section.hasClass('editable')) {
+    return;
   }
+
+  $section.addClass('active');
+  $inputs.removeAttr('readonly');
+  $inputs.first().select();
+}
+
+Template.profile.events({
+  // Enable disabled textareas and input fields
+  'click .form-section': (event, template) => {
+    enableFormSection($(event.currentTarget));
+  },
+
+  // Also enable field when changing using tab key
+  'focus textarea, focus input': (event, template) => {
+    enableFormSection($(event.target).closest('.form-section'));
+  },
+
+  'keyup textarea, keyup input': (event, template) => {
+    // Don't validate when pressing "tab" key
+    if (event.which === 9) { // "Tab"
+      return;
+    }
+
+    var $form = $('[data-id=update-profile-form]');
+
+    window.requestAnimationFrame(function () {
+      if ($form.first()[0].checkValidity()) {
+        $('input[type=submit]').removeClass('disabled');
+      } else {
+        $('input[type=submit]').addClass('disabled');
+      }
+    });
+  },
 });
 
 getUser = () => {
@@ -37,6 +72,10 @@ var throttleGetUser = _.throttle(getUser, 100);
 
 Template.profile.helpers({
   user: throttleGetUser
+});
+
+Template.profile.onRendered(() => {
+  autosize($('textarea'));
 });
 
 Template.profile.onCreated(function () {
