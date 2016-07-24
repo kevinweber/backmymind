@@ -12,19 +12,27 @@ Template.profile.helpers({
     var currentId = FlowRouter.getParam('_id'),
       user = Meteor.users.findOne({
         _id: currentId
-      });
+      }),
+      relation;
 
     if (user) {
       user.account = true;
-      
+
       if (currentId === Meteor.userId()) {
         user.self = true;
+        return user;
       }
     } else {
       user = {};
     }
-    
-    user.relation = Relations.findOne(currentId);
+
+    relation = Relations.findOne(currentId);
+
+    if (typeof relation !== 'undefined') {
+      user.relation = relation;
+    } else if (!user.account) {
+      user.none = true;
+    }
 
     return user;
   }
