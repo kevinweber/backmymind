@@ -22,13 +22,13 @@ Template.profile.events({
   },
 
   'keyup textarea, keyup input, paste textarea, paste input': (event, template) => {
-    // Don't validate when pressing "tab" key
-    if (event.which === 9) { // "Tab"
+    // Don't validate when pressing "tab"/"enter" key
+    if (event.which === 9 || event.which === 13) { // "Tab" || "Enter"
       return;
     }
 
     var $form = $('[data-id=update-profile-form]');
-    
+
     $(event.target).addClass('populated');
 
     window.requestAnimationFrame(function () {
