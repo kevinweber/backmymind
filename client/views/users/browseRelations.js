@@ -55,13 +55,7 @@ Template.browseRelations.helpers({
     
     // If filter is given...
     if (filter) {
-      relations = Meteor.users.findOne({
-        _id: Meteor.userId()
-      }, {
-        fields: {
-          "relations": 1
-        }
-      }).relations;
+      relations = Relations.find();
 
       relations = filterRelations(relations, filter);
     } else {

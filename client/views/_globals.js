@@ -8,6 +8,41 @@ getGravatar = function (email, size) {
   return '//www.gravatar.com/avatar/' + MD5(email) + '.jpg';
 }
 
+/*
+ * Get relations of current user.
+ * Make sure template has subscribed before requesting relations:
+ *   Meteor.subscribe('user.relations');
+ */
+Relations = {
+  find: function () {
+    var relations;
+
+    relations = Meteor.users.findOne({
+        _id: Meteor.userId()
+      }, {
+        fields: {
+          "relations": 1
+        }
+      });
+
+    if (relations) {
+      return relations.relations;
+    };
+  },
+  
+  findOne: function (id) {
+    var object = Relations.find();
+    
+    for (let relation in object) {
+      if (object.hasOwnProperty(relation)) {
+        if (object[relation]._id === id) {
+          return object[relation];
+        }
+      }
+    }
+  }
+}
+
 RelationHelper = {
   props: null,
   linkName: null,
