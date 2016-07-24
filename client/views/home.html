@@ -34,7 +34,7 @@
     <div class="twelve columns">
       {{#each all}}
         <div class="small-profile">
-          <img class="avatar-image u-pull-left" src="{{this.avatar}}?s=20" alt="">
+          <img class="avatar-image u-pull-left" src="{{avatar this._id email=this.email}}" alt="">
           <a href="{{pathFor 'profile' _id=this._id}}" class="u-pull-left">{{this.helper.linkName}}</a>
           <p>Last meeting: {{date this.lastMeeting "short"}}</p>
           <div class="u-pull-right">

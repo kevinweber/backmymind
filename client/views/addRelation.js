@@ -146,7 +146,6 @@ Template.addRelation.events({
       user.facebook = template.find('[data-id=addFacebook]').value.toString();
       user.linkedin = template.find('[data-id=addLinkedin]').value.toString();
       user.notes = template.find('[data-id=addNotes]').value.toString();
-      user.avatar = getGravatar(user.email);
 
       Meteor.call('users.addRelation', user, (error, result) => {
         if (error) {

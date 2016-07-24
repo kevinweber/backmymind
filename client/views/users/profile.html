@@ -4,7 +4,7 @@
       <div class="profile">
         {{#with user}}
           {{#unless user.relation}} 
-            {{> avatar user=user size='extra-large' shape='circle' class='avatar-center'}}
+            <p class="text-center"><img class="avatar-image" src="{{avatar this._id size=100}}" alt=""></p>
             <h1 class="text-center username">@{{user.username}} <span class="text-center fa {{#if user.status.online}} fa-circle presence online {{else}} fa-circle-o presence offline {{/if}} "></span></h1>
             <div id="socialMediaAccounts">
             </div>

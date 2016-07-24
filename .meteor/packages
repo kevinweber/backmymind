@@ -33,7 +33,7 @@ reactive-var
 momentjs:moment
 reywood:publish-composite
 fortawesome:fontawesome
-utilities:avatar
+# utilities:avatar
 tmeasday:publish-counts
 verron:autosize
 mizzao:user-status

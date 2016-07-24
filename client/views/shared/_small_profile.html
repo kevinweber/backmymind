@@ -1,7 +1,7 @@
 <template name="smallProfile">
   <div class="small-profile">
     <a href="{{pathFor 'profile' _id=this.user._id}}">
-      {{> avatar user=this.user size='small' shape='circle' class='u-pull-left'}}
+      <p class="text-center"><img class="avatar-image" src="{{avatar this.user._id 30}}" alt=""></p>
     </a>
     <a href="{{pathFor 'profile' _id=this.user._id}}" class="u-pull-left">@{{this.user.username}}</a>
      <span class="fa {{#if this.user.status.online}} fa-circle presence online {{else}} fa-circle-o presence offline {{/if}}"></span>

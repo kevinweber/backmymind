@@ -8,7 +8,7 @@
           <div class="post-line-two">
             <div class="post-line-two-left">
               <a href="{{pathFor 'profile' _id=author._id}}">
-                {{> avatar user=author size='extra-small' shape='circle' class='u-pull-left avatar'}}
+                <img class="avatar-image u-pull-left" src="{{avatar author._id 30}}" alt="">
               </a>
               <a href="{{pathFor 'profile' _id=author._id}}" class="u-pull-left author">@{{author.username}}</a>
               <span class="fa {{#if author.status.online}} fa-circle presence online {{else}} fa-circle-o presence offline {{/if}} ">

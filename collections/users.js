@@ -97,8 +97,7 @@ Meteor.methods({
       secondaryPhone: ValidPhone,
       facebook: ValidUrl,
       linkedin: ValidUrl,
-      notes: String,
-      avatar: String
+      notes: String
     });
 
     ownEmails = collectValues(currentUser.emails, "address");
