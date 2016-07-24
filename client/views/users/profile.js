@@ -21,13 +21,15 @@ Template.profile.events({
     enableFormSection($(event.target).closest('.form-section'));
   },
 
-  'keyup textarea, keyup input': (event, template) => {
+  'keyup textarea, keyup input, paste textarea, paste input': (event, template) => {
     // Don't validate when pressing "tab" key
     if (event.which === 9) { // "Tab"
       return;
     }
 
     var $form = $('[data-id=update-profile-form]');
+    
+    $(event.target).addClass('populated');
 
     window.requestAnimationFrame(function () {
       if ($form.first()[0].checkValidity()) {
@@ -36,7 +38,7 @@ Template.profile.events({
         $('input[type=submit]').addClass('disabled');
       }
     });
-  },
+  }
 });
 
 getUser = () => {

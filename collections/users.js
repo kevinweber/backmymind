@@ -60,8 +60,9 @@ function collectValues(array, propertyName) {
 Meteor.methods({
   'users.updateProfile': (user) => {
     check(user, {
-      biography: String,
-      socialMedia: Object
+      biography: Match.Optional(String),
+      firstName: Match.Optional(String),
+      lastName: Match.Optional(String)
     });
 
     if (!Meteor.user()) {
@@ -71,10 +72,7 @@ Meteor.methods({
     Meteor.users.update({
       _id: Meteor.userId()
     }, {
-      $set: {
-        biography: user.biography,
-        socialMedia: user.socialMedia
-      }
+      $set: user
     });
   },
 
@@ -109,7 +107,7 @@ Meteor.methods({
     if (relation.email.length !== 0 && typeof currentUser.relations !== 'undefined' && collectValues(currentUser.relations, "email").indexOf(relation.email) !== -1) {
       throw new Meteor.Error(422, 'You added a relation with that email address already');
     }
-    
+
     // Add unique ID to each relation
     relation._id = new Meteor.Collection.ObjectID().valueOf();
     relation.createdAt = new Date();
