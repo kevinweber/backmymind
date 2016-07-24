@@ -66,7 +66,7 @@ function selectedDate(template) {
     value = $(template.find('.datepicker')).data('value');
   }
 
-  return new Date(value);
+  return new Date(moment(value).format());
 }
 
 Template.addRelation.events({
