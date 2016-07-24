@@ -82,25 +82,6 @@ Template.addRelation.events({
     });
   },
 
-  'keydown input': (event, template) => {
-    var $form = $('[data-id=add-relation]'),
-      $inputs,
-      currentIndex;
-
-    if (!event.shiftKey && event.keyCode === 13) {
-      event.preventDefault();
-
-      $inputs = $form.find('input, textarea').not('[disabled], .disabled');
-      currentIndex = $inputs.index(event.target);
-
-      if (currentIndex + 1 === $inputs.length || $inputs.get(currentIndex + 1).type === 'submit') {
-        submitForm();
-      } else {
-        $inputs.get(currentIndex + 1).focus();
-      }
-    }
-  },
-
   'keydown input, keydown textarea': (event, template) => {
     var $form = $('[data-id=add-relation]');
 
