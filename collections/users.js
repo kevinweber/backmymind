@@ -78,7 +78,7 @@ Meteor.methods({
     });
   },
 
-  'users.addRelation': (user) => {
+  'users.addRelation': (relation) => {
     var ownEmails,
       currentUser;
 
@@ -88,7 +88,7 @@ Meteor.methods({
       throw new Meteor.Error(401, 'You need to be signed in to continue');
     }
 
-    check(user, {
+    check(relation, {
       email: ValidEmail,
       firstName: String,
       lastName: String,
@@ -101,23 +101,24 @@ Meteor.methods({
     });
 
     ownEmails = collectValues(currentUser.emails, "address");
-    if (ownEmails.indexOf(user.email) !== -1) {
+    if (ownEmails.indexOf(relation.email) !== -1) {
       throw new Meteor.Error(422, 'You can not add yourself');
     }
 
     // Allow every email address only once
-    if (user.email.length !== 0 && typeof currentUser.relations !== 'undefined' && collectValues(currentUser.relations, "email").indexOf(user.email) !== -1) {
+    if (relation.email.length !== 0 && typeof currentUser.relations !== 'undefined' && collectValues(currentUser.relations, "email").indexOf(relation.email) !== -1) {
       throw new Meteor.Error(422, 'You added a relation with that email address already');
     }
     
     // Add unique ID to each relation
-    user._id = new Meteor.Collection.ObjectID().valueOf();
+    relation._id = new Meteor.Collection.ObjectID().valueOf();
+    relation.createdAt = new Date();
 
     Meteor.users.update({
       _id: Meteor.userId()
     }, {
       $addToSet: {
-        relations: user
+        relations: relation
       }
     });
   }
