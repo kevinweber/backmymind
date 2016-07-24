@@ -4,38 +4,39 @@ Template.profile.events({
   }
 });
 
+getUser = () => {
+  var currentId = FlowRouter.getParam('_id'),
+    user = Meteor.users.findOne({
+      _id: currentId
+    }),
+    relation;
 
+  if (user) {
+    user.account = true;
 
+    if (currentId === Meteor.userId()) {
+      user.self = true;
+      return user;
+    }
+  } else {
+    user = {};
+  }
+
+  relation = Relations.findOne(currentId);
+
+  if (typeof relation !== 'undefined') {
+    user.relation = relation;
+  } else if (!user.account) {
+    user.none = true;
+  }
+
+  return user;
+}
+
+var throttleGetUser = _.throttle(getUser, 100);
 
 Template.profile.helpers({
-  user: () => {
-    var currentId = FlowRouter.getParam('_id'),
-      user = Meteor.users.findOne({
-        _id: currentId
-      }),
-      relation;
-
-    if (user) {
-      user.account = true;
-
-      if (currentId === Meteor.userId()) {
-        user.self = true;
-        return user;
-      }
-    } else {
-      user = {};
-    }
-
-    relation = Relations.findOne(currentId);
-
-    if (typeof relation !== 'undefined') {
-      user.relation = relation;
-    } else if (!user.account) {
-      user.none = true;
-    }
-
-    return user;
-  }
+  user: throttleGetUser
 });
 
 Template.profile.onCreated(function () {
