@@ -26,8 +26,8 @@
           <a href="{{pathFor 'follower'}}"><i class="fa fa-arrow-right"></i> <i class="fa fa-user"></i> Followers</a>
         </li>
 -->
-        <li class="{{activeIfRouteNameIs 'updateProfile'}}">
-          <a href="{{pathFor 'updateProfile'}}"><i class="fa fa-cogs"></i> Update profile</a>
+        <li class="{{activeIfRouteNameIs 'profile'}}">
+          <a href="{{pathFor 'profile' _id=currentUser._id}}"><i class="fa fa-cogs"></i> Your profile</a>
         </li>
         <li>
           <a href="#" data-id="sign-out"><i class="fa fa-sign-out fa-lg"></i> Logout</a>
