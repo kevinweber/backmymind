@@ -1,18 +1,11 @@
 Template.profileMe.events({
   'submit [data-id=update-profile-form]': (event, template) => {
     event.preventDefault();
-
-    var updatedValues = {};
-
-    // We're only interested in fields with changes values
-    $(event.currentTarget).find('input.populated[data-id], textarea.populated[data-id]').each(function () {
-      var $that = $(this);
-
-      updatedValues[$that.attr('data-id')] = $that.val();
-    });
     
-    if ($.isEmptyObject(updatedValues)) {
-      return; // Nothing has changed
+    var updatedValues = getUpdatedValues($(event.currentTarget));
+
+    if (! updatedValues) {
+      return;
     }
 
     Meteor.call('users.updateProfile', updatedValues, (error, result) => {

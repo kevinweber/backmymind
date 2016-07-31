@@ -1,3 +1,21 @@
+getUpdatedValues = ($form) => {
+  var updatedValues = {};
+
+  // We're only interested in fields with changes values
+  $form.find('input.populated[data-id], textarea.populated[data-id]').each(function () {
+    var $that = $(this);
+
+    updatedValues[$that.attr('data-id')] = $that.val();
+  });
+
+  if ($.isEmptyObject(updatedValues)) {
+    return false; // Nothing has changed
+  }
+  
+  return updatedValues;
+}
+
+
 resetForm = ($form) => {
   $form.find('.form-section.editable.active').each(function () {
     let $this = $(this);
