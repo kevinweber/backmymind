@@ -77,6 +77,34 @@ Meteor.methods({
     });
   },
 
+  'users.updateRelation': (relation) => {
+    check(relation, {
+      firstName: Match.Optional(String),
+      lastName: Match.Optional(String),
+      link: Match.Optional(ValidUrl),
+      __index: Number
+    });
+
+    if (!Meteor.user()) {
+      throw new Meteor.Error(401, 'You need to be signed in to continue');
+    }
+
+    var setModifier = {
+      $set: {}
+    };
+
+    for (let property in relation) {
+      // Don't store "__index" into database
+      if (relation.hasOwnProperty(property) && property !== '__index') {
+        setModifier.$set['relations.' + relation.__index + '.' + property] = relation[property];
+      }
+    }
+
+    Meteor.users.update({
+      _id: Meteor.userId()
+    }, setModifier);
+  },
+
   'users.addRelation': (relation) => {
     var ownEmails,
       currentUser;

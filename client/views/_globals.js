@@ -36,6 +36,8 @@ Relations = {
     for (let relation in object) {
       if (object.hasOwnProperty(relation)) {
         if (object[relation]._id === id) {
+          // Passing "__index" allows us to update this relation without having to loop through all relations again
+          object[relation].__index = parseInt(relation, 10);
           return object[relation];
         }
       }
@@ -69,11 +71,15 @@ RelationHelper = {
 
 addRelationHelpers = function (relations) {
   for (let i = 0, l = relations.length; i < l; i += 1) {
-    if (typeof relations[i].helper !== 'RelationHelper') {
-      relations[i].helper = Object.create(RelationHelper);
+    if (relations[i]) {
+      if (typeof relations[i].helper !== 'RelationHelper') {
+        relations[i].helper = Object.create(RelationHelper);
+      }
+
+      relations[i].helper.init(relations[i]);
+    } else {
+      // TODO: Delete relations if they are "null"
     }
-    
-    relations[i].helper.init(relations[i]);
   }
 
   return relations;

@@ -1,9 +1,35 @@
-<template name="relation">
-  <div class="row">
-    <div class="twelve columns">
-      <p class="text-center">{{> avatar data=this size=100}}</p>
-      <div class="clear"></div>
-      <h1 class="text-center username">{{this.firstName}}{{#if this.firstName}} {{/if}}{{this.lastName}}</h1>
+<template name="profileRelation">
+  <form data-id="update-profile-form">
+    <p class="text-center">{{> avatar data=this size=100}}</p>
+    <h1 class="text-center username">{{this.firstName}} {{this.lastName}}</h1>
+    <div id="socialMediaAccounts">
     </div>
-  </div>
+    
+    <div class="row form-section editable">
+      <label for="first-name">First Name</label>
+      <input id="first-name" class="u-full-width" type="text" value="{{this.firstName}}" placeholder="Add first name" maxlength="50" data-id="firstName" readonly>
+    </div>
+
+    <div class="row form-section editable">
+      <label for="last-name">Last Name</label>
+      <input id="last-name" class="u-full-width" type="text" value="{{this.lastName}}" placeholder="Add last name" maxlength="50" data-id="lastName" readonly>
+    </div>
+
+<!--
+    <div class="row form-section editable">
+      <label for="biography">Biography</label>
+      <textarea id="biography" class="u-full-width biography" placeholder="Add bio (140 characters max)" maxlength="140" data-id="biography" readonly>{{this.biography}}</textarea>
+    </div>
+-->
+
+<!--
+    <div class="row form-section editable">
+      <label for="link">Link (website, social media, …)</label>
+      <input id="link" class="u-full-width" type="url" value="{{this.link}}" placeholder="Start with http:// or https://" data-id="link" readonly>
+    </div>
+-->
+
+    <input type="submit" class="button-primary disabled" value="Save changes">
+<!--    <p><span class="cancel">Cancel</span></p>-->
+  </form>
 </template>

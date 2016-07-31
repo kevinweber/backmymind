@@ -7,6 +7,12 @@ function sortObjectWithObjects(object, nodeName) {
     return;
   }
   return object.sort(function (a, b) {
+    // Push invalid object to back
+    // TODO: Make sure that we never have invalid objects
+    if (!a || !b) {
+      return -1;
+    }
+    
     a = sortDateFilter(a[nodeName]);
     b = sortDateFilter(b[nodeName]);
 
