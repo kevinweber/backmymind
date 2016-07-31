@@ -62,7 +62,8 @@ Meteor.methods({
     check(user, {
       biography: Match.Optional(String),
       firstName: Match.Optional(String),
-      lastName: Match.Optional(String)
+      lastName: Match.Optional(String),
+      link: Match.Optional(ValidUrl)
     });
 
     if (!Meteor.user()) {

@@ -20,6 +20,11 @@
       <textarea id="biography" class="u-full-width biography" placeholder="Add bio (140 characters max)" maxlength="140" data-id="biography" readonly>{{currentUser.biography}}</textarea>
     </div>
 
+    <div class="row form-section editable">
+      <label for="link">Link (website, social media, …)</label>
+      <input id="link" class="u-full-width" type="url" value="{{currentUser.link}}" placeholder="Start with http:// or https://" data-id="link" readonly>
+    </div>
+
     <input type="submit" class="button-primary disabled" value="Save changes">
 <!--    <p><span class="cancel">Cancel</span></p>-->
   </form>

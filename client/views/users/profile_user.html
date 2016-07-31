@@ -25,5 +25,13 @@
       <p id="biography" class="u-full-width" data-element-type="textarea">{{this.biography}}</p>
     </div>
     {{/if}}
+
+    {{#if this.link}}
+    <div class="row form-section">
+      <label for="link">Link</label>
+      <a href="{{this.link}}" id="link" class="u-full-width" target="_blank">{{this.link}}</a>
+    </div>
+    {{/if}}
+    
   </form>
 </template>
