@@ -70,7 +70,7 @@ Template.profile.events({
   }
 });
 
-getUser = () => {
+currentProfile = () => {
   var currentId = FlowRouter.getParam('_id'),
     user = Meteor.users.findOne({
       _id: currentId
@@ -99,10 +99,10 @@ getUser = () => {
   return user;
 }
 
-var throttleGetUser = _.throttle(getUser, 100);
-
 Template.profile.helpers({
-  user: throttleGetUser
+  user: function () {
+    return Template.instance().user.get();
+  }
 });
 
 Template.profile.onRendered(() => {
@@ -110,6 +110,8 @@ Template.profile.onRendered(() => {
 });
 
 Template.profile.onCreated(function () {
+  this.user = new ReactiveVar(currentProfile());
+  
   this.limit = new ReactiveVar(20);
   //  this.userPostsCount = new ReactiveVar(0);
 
@@ -118,6 +120,8 @@ Template.profile.onCreated(function () {
     this.subscribe('users.profile', FlowRouter.getParam('_id'), this.limit.get());
     //    this.userPostsCount.set(Counts.get('users.profile'));
 
+    Template.instance().user.set(currentProfile());
+    
     // Get current user's social media accounts
     let profileUser = Meteor.users.findOne({
       _id: FlowRouter.getParam('_id')
