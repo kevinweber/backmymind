@@ -153,20 +153,3 @@ Meteor.publishComposite('users.profile', function(_id, limit) {
 //    return [];
 //  }
 //});
-//
-//Meteor.publish('jobs.all', function(query, limit) {
-//  check(query, String);
-//  check(limit, Number);
-//
-//  if (this.userId) {
-//    if (query) {
-//      Counts.publish(this, 'jobs.all', Jobs.find({title: { $regex: '.*' + query + '.*', $options: 'i' } }), { noReady: true });
-//      return Jobs.find({ title: { $regex: '.*' + query + '.*', $options: 'i' } }, { sort: { createdOn: -1 }, limit: limit });
-//    } else {
-//      Counts.publish(this, 'jobs.all', Jobs.find({}), { noReady: true });
-//      return Jobs.find({}, { sort: { createdOn: -1 }, limit: limit });
-//    }
-//  } else {
-//    return [];
-//  }
-//});
